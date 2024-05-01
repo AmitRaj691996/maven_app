@@ -1,9 +1,21 @@
 pipeline{
     agent any
+    environment{
+        RELEASE_VERSION='1.1.0'
+        INT_VERSION = 'R2'
+
+    }
     stages{
         stage('Audit Stage'){
             steps{
                 auditStage()
+            }
+        }
+        stage('unit test'){
+            steps{
+                dir('./single-module'){
+                    test()
+                }
             }
         }
     }
@@ -15,4 +27,10 @@ void auditStage(){
     java --version
     mvn --version
     '''
+}
+void test(){
+    '''
+    ls
+    mvn validate test
+    ''
 }
