@@ -27,9 +27,11 @@ pipeline{
             }
             steps{
                 dir('./single-module'){
+                    sh '''
                     mvn versions:set -DnewVersion=SUFFIX
                     mvn versions:update-child-modules
                     mvn clean package 
+                    '''
                 }
 
             }    
