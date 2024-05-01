@@ -22,7 +22,7 @@ pipeline{
                 ls
                 mvn validate 
                 mvn compile
-                mvn tese
+                mvn test
                 '''
                 }
             }
