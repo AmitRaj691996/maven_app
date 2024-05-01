@@ -16,14 +16,15 @@ pipeline{
             }
         }
         stage('Unit Test'){
-            dir('./single-module')
             steps{
+                dir('./single-module'){
                 sh '''
                 ls
                 mvn validate 
                 mvn compile
                 mvn tese
                 '''
+                }
             }
         }
     }
