@@ -12,6 +12,17 @@ pipeline{
                   git --version
                   java --version
                   mvn --version
+                  '''
+            }
+        }
+        stage('Unit Test'){
+            dir('./single-module')
+            steps{
+                sh '''
+                ls
+                mvn validate 
+                mvn compile
+                mvn tese
                 '''
             }
         }
