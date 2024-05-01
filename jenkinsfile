@@ -17,14 +17,10 @@ pipeline{
         }
         stage('Unit Test'){
             steps{
-                dir('./single-module'){
                 sh '''
                 ls
-                mvn validate 
-                mvn compile
-                mvn test
-                '''
-                }
+                mvn -f ./single-module/pom.xml clean validate
+                '''    
             }
         }
         stage('Build'){
