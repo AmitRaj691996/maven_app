@@ -12,4 +12,5 @@ void auditStage(){
     git --version 
     java --version
     mvn --version
+    '''
 }
