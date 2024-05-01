@@ -5,6 +5,9 @@ pipeline{
         INT_VERSION = 'R2'
 
     }
+    parameters{
+        booleanParam(name: 'RELEASE', defaultValue: false, description: 'Is this a release candidate ?')
+    }
     stages{
         stage('Audit Stage'){
             steps{
@@ -18,6 +21,20 @@ pipeline{
                 }
             }
         }
+        stage('build'){
+            environment{
+                SUFFIX = getBuildNumber()
+            }
+            steps{
+                dir('./single-module'){
+                    mvn versions:set -DnewVersion=SUFFIX
+                    mvn versions:update-child-modules
+                    mvn clean package 
+                }
+
+            }    
+
+        }
     }
 }
 
@@ -28,9 +45,18 @@ void auditStage(){
     mvn --version
     '''
 }
-void test(){
+void test() {
     sh '''
     ls
     mvn validate test
     '''
+}
+
+String getBuildNumber(){
+    if(env.RELEASE==true){
+        return RELEASE:$BUILD_NUMBER
+    }
+    else 
+        return INT_VERSION:$BUILD_NUMBER
+
 }
