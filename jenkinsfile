@@ -27,5 +27,17 @@ pipeline{
                 }
             }
         }
+        stage('Build'){
+            steps{
+                echo "Building version ${VERSION} with suffix: ${RELEASE_VERSION}"
+                dir('./single-module'){
+                    sh '''
+                    mvn versions:set -DnewVersion="${VERSION}"-SNAPSHOT
+                    mvn version:update-child-modules
+                    mvn clean package
+                    '''
+                }
+            }
+        }
     }
 }
