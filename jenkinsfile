@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    environment{
+        VERSION = '2.1.0'
+        RELEASE_VERSION = 'R.2'
+    }
+    stages{
+        stage('Audit tools'){
+            steps{
+                sh '''
+                  ls
+                  git --version
+                  java --version
+                  mvn --version
+            }
+        }
+    }
+}
