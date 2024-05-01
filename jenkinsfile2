@@ -37,6 +37,11 @@ pipeline{
             }    
 
         }
+        stage('Publish Artifacts...'){
+            steps{
+                archiveArtifacts('**/*.jar')
+            }
+        }
     }
 }
 
@@ -62,3 +67,4 @@ String getBuildNumber(){
         return env.INT_VERSION+':'+ env.BUILD_NUMBER
 
 }
+
