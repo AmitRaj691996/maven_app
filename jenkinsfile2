@@ -29,7 +29,7 @@ void auditStage(){
     '''
 }
 void test(){
-    '''
+    sh '''
     ls
     mvn validate test
     ''
