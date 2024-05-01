@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage('Audit Stage'){
+
+        }
+    }
+}
+
+void auditStage(){
+    sh '''
+    git --version 
+    java --version
+    mvn --version
+}
