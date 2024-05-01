@@ -55,10 +55,10 @@ void test() {
 }
 
 String getBuildNumber(){
-    if(env.RELEASE==true){
-        return env.RELEASE+':'+$BUILD_NUMBER
+    if(params.RELEASE==true){
+        return env.RELEASE_VERSION+':'+ env.BUILD_NUMBER
     }
     else 
-        return env.INT_VERSION+':'+$BUILD_NUMBER
+        return env.INT_VERSION+':'+ env.BUILD_NUMBER
 
 }
